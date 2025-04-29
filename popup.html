@@ -61,7 +61,7 @@
             </div>
         </div>
         <div class="side right">
-            <div id = "2Star_rating"></div>
+            <div id="2Star_rating"></div>
         </div>
 
         <div class="side">
@@ -76,6 +76,50 @@
             <div id="1Star_rating"></div>
         </div>
     </div>
+    <div class="rating-system">
+        <h3>Rate this site:</h3>
+        <div class="stars">
+            <span class="star" data-value="1"></span>
+            <span class="star" data-value="2"></span>
+            <span class="star" data-value="3"></span>
+            <span class="star" data-value="4"></span>
+            <span class="star" data-value="5"></span>
+        </div>
+        <p id="selected-rating">Bewertung: 0 Sterne</p>
+    </div>
+
+    <script>
+        const stars = document.querySelectorAll('.star');
+        const ratingDisplay = document.getElementById('selected-rating');
+        let selectedRating = 0;
+
+        stars.forEach(star => {
+            star.addEventListener('mouseover', () => {
+                const value = star.getAttribute('data-value');
+                highlightStars(value);
+            });
+
+            star.addEventListener('mouseout', () => {
+                highlightStars(selectedRating);
+            });
+
+            star.addEventListener('click', () => {
+                selectedRating = star.getAttribute('data-value');
+                ratingDisplay.textContent = `Bewertung: ${selectedRating} Sterne`;
+            });
+        });
+
+        function highlightStars(rating) {
+            stars.forEach(star => {
+                const value = star.getAttribute('data-value');
+                if (value <= rating) {
+                    star.classList.add('filled');
+                } else {
+                    star.classList.remove('filled');
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>

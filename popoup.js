@@ -2,10 +2,22 @@ document.addEventListener('DOMContentLoaded', function () {
     chrome.storage.sync.get(['ratings'], function (result) {
         const ratings = result.ratings || {};
         // set website name
-        const rawUrl = window.location.href;
-        const domain = rawUrl.match(/^https?:\/\/(?:www\.)?([^\/?#]+)/i)[1];
-        document.getElementById("website_name").textContent = domain;
-
+        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+            const url = tabs[0].url;
+            const domain = url.match(/^https?:\/\/(?:www\.)?([^\/?#]+)/i)[1];
+            document.getElementById("website_name").textContent = domain;
+        
+            chrome.storage.sync.get(['ratings'], function (result) {
+                const ratings = result.ratings || {};
+                const avg = calcAvg(ratings);
+                document.getElementById("user_avg_rating").textContent = avg.toFixed(2);
+        
+                const ratingSummary = calcRatings(ratings);
+                setRating(ratingSummary);
+                setBar(ratingSummary, Object.entries(ratings).length);
+            });
+        });
+        
         // set avg
         const avg = calcAvg(ratings);
         document.getElementById("user_avg_rating").textContent = avg.toString();
@@ -63,8 +75,5 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     }
-
-
-
 
 });

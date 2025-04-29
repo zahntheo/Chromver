@@ -2,11 +2,13 @@
     box-sizing: border-box;
   }
   
+  
   body {
     font-family: Arial;
-    margin: 0 auto; /* Center website */
-    max-width: 800px; /* Max width */
-    padding: 20px;
+    width: 300px;
+    height: 400px;
+    padding: 10px;
+    box-sizing: border-box;
   }
   
   .heading {
@@ -72,3 +74,24 @@
       display: none;
     }
   }
+  .stars {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.star {
+    font-size: 40px;
+    color: #ccc;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    margin-right: 5px;
+}
+
+.star.filled {
+    color: gold;
+}
+
+.star:hover {
+    color: gold;
+}
