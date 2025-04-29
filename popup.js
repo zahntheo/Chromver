@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         star.addEventListener('click', () => {
             selectedRating = star.getAttribute('data-value');
-            ratingDisplay.textContent = `Bewertung: ${selectedRating} Sterne`;
+            ratingDisplay.textContent = `Rate: ${selectedRating} Stars`;
             saveRating(selectedRating);
         });
     });
