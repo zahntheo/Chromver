@@ -23,17 +23,17 @@ document.addEventListener('DOMContentLoaded', function () {
     stars.forEach(star => {
         star.addEventListener('mouseover', () => {
             const value = star.getAttribute('data-value');
-            highlightStars(value); 
+            highlightStars(value);
         });
 
         star.addEventListener('mouseout', () => {
-            highlightStars(selectedRating); 
+            highlightStars(selectedRating);
         });
 
         star.addEventListener('click', () => {
             selectedRating = star.getAttribute('data-value');
-            ratingDisplay.textContent = `Bewertung: ${selectedRating} Sterne`; 
-            saveRating(selectedRating); 
+            ratingDisplay.textContent = `Bewertung: ${selectedRating} Sterne`;
+            saveRating(selectedRating);
         });
     });
 
@@ -41,23 +41,28 @@ document.addEventListener('DOMContentLoaded', function () {
         stars.forEach(star => {
             const value = parseInt(star.getAttribute('data-value'), 10);
             if (value <= rating) {
-                star.classList.add('filled'); 
+                star.classList.add('filled');
             } else {
-                star.classList.remove('filled'); 
+                star.classList.remove('filled');
             }
         });
     }
 
     function saveRating(rating) {
-        const domain = window.location.hostname; 
-        chrome.storage.sync.get(['ratings'], function(result) {
-            let ratings = result.ratings || {}; 
-            ratings[domain] = rating; 
-            chrome.storage.sync.set({ 'ratings': ratings }, function() {
-                console.log(`Bewertung für ${domain} gespeichert: ${rating} Sterne`);
+        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+            const url = tabs[0].url;
+            const domain = url.match(/^https?:\/\/(?:www\.)?([^\/?#]+)/i)[1];
+
+            chrome.storage.sync.get(['ratings'], function (result) {
+                let ratings = result.ratings || {};
+                ratings[domain] = parseInt(rating, 10);
+                chrome.storage.sync.set({ 'ratings': ratings }, function () {
+                    console.log(`Bewertung für ${domain} gespeichert: ${rating} Sterne`);
+                });
             });
         });
     }
+
 
     function calcAvg(ratings) {
         if (!ratings || Object.keys(ratings).length === 0) {
@@ -95,11 +100,21 @@ document.addEventListener('DOMContentLoaded', function () {
     function setBar(ratingDic, numberOfRatings) {
         for (let i = 1; i <= 5; i++) {
             const key = `star${i}`;
-            const width = (ratingDic[key] / numberOfRatings) * 100;
-            const bar = document.getElementById(`bar-star${i}`);
-            if (bar) {
-                bar.style.width = `${width}%`;
+            const widthB = ratingDic[key]
+            if (widthB == 0) {
+                const bar = document.getElementById(`bar-star${i}`);
+                if (bar) {
+                    bar.style.width = `$0%`;
+                }
+            } else {
+                const width = (widthB / numberOfRatings) * 100;
+                const bar = document.getElementById(`bar-star${i}`);
+
+                if (bar) {
+                    bar.style.width = `${width}%`;
+                }
             }
+            
         }
     }
 });
