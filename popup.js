@@ -8,8 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById("website_name").textContent = domain;
 
             const avg = calcAvg(ratings);
-            document.getElementById("user_avg_rating").textContent = avg.toFixed(2);
-
+            document.getElementById("user_avg_rating").textContent = `Average: ${avg.toFixed(2)} Sterne`;
             const ratingSummary = calcRatings(ratings);
             setRating(ratingSummary);
             setBar(ratingSummary, Object.entries(ratings).length);
