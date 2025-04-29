@@ -1,0 +1,20 @@
+{
+    "manifest_version": 2,
+    "name": "Rating extension",
+    "version": "1.0",
+    "description": "This Chrome extension allows users to rate the websites they visit with a simple and intuitive interface. Whether it's giving a star rating or a thumbs up/down, users can store their personal evaluations of any site directly in their browse",
+    "permissions": ["storage"],
+    "browser_action": {
+      "default_popup": "popup.html",
+      "default_icon": {
+        "16": "images/task-list.png",
+        "48": "images/check.png",
+        "128": "images/check-list.png"
+      }
+    },
+    "icons": {
+      "16": "images/task-list.png",
+      "48": "images/check.png",
+      "128": "images/check-list.png"
+    }
+  }
