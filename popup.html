@@ -5,80 +5,66 @@
     <title>Rate the website</title>
     <link rel="stylesheet" type="text/css" href="style.css" />
     <script src="popup.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <span class="heading" id="website_name">Bewerte diese Seite:</span>
 
-    <span class="heading" id="website_name"></span>
-    <span class="fa fa-star checked"></span>
-    <span class="fa fa-star checked"></span>
-    <span class="fa fa-star checked"></span>
-    <span class="fa fa-star checked"></span>
-    <span class="fa fa-star"></span>
-    <p id="user_avg_rating"></p>
+    <div class="stars">
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star"></span>
+    </div>
+    <p id="user_avg_rating">Durchschnittliche Bewertung: 4 Sterne</p>
     <hr style="border:3px solid #f1f1f1">
 
     <div class="row">
-        <div class="side">
-            <div>5 star</div>
-        </div>
+        <div class="side"><div>5 Sterne</div></div>
         <div class="middle">
             <div class="bar-container">
                 <div id="bar-star5" class="bar-5"></div>
             </div>
         </div>
-        <div class="side right">
-            <div id="5Star_rating"></div>
-        </div>
-        <div class="side">
-            <div>4 star</div>
-        </div>
+        <div class="side right"><div id="5Star_rating"></div></div>
+
+        <div class="side"><div>4 Sterne</div></div>
         <div class="middle">
             <div class="bar-container">
                 <div id="bar-star4" class="bar-4"></div>
             </div>
         </div>
-        <div class="side right">
-            <div id="4Star_rating"></div>
-        </div>
-        <div class="side">
-            <div>3 star</div>
-        </div>
+        <div class="side right"><div id="4Star_rating"></div></div>
+
+        <div class="side"><div>3 Sterne</div></div>
         <div class="middle">
             <div class="bar-container">
                 <div id="bar-star3" class="bar-3"></div>
             </div>
         </div>
-        <div class="side right">
-            <div id="3Star_rating"></div>
-        </div>
-        <div class="side">
-            <div>2 star</div>
-        </div>
+        <div class="side right"><div id="3Star_rating"></div></div>
+
+        <div class="side"><div>2 Sterne</div></div>
         <div class="middle">
             <div class="bar-container">
                 <div id="bar-star2" class="bar-2"></div>
             </div>
         </div>
-        <div class="side right">
-            <div id="2Star_rating"></div>
-        </div>
+        <div class="side right"><div id="2Star_rating"></div></div>
 
-        <div class="side">
-            <div>1 star</div>
-        </div>
+        <div class="side"><div>1 Stern</div></div>
         <div class="middle">
             <div class="bar-container">
                 <div id="bar-star1" class="bar-1"></div>
             </div>
         </div>
-        <div class="side right">
-            <div id="1Star_rating"></div>
-        </div>
+        <div class="side right"><div id="1Star_rating"></div></div>
     </div>
+
     <div class="rating-system">
-        <h3>Rate this site:</h3>
+        <h3>Rate diese Seite:</h3>
         <div class="stars">
             <span class="star" data-value="1"></span>
             <span class="star" data-value="2"></span>
@@ -88,6 +74,8 @@
         </div>
         <p id="selected-rating">Bewertung: 0 Sterne</p>
     </div>
+
 </body>
 
 </html>
+
