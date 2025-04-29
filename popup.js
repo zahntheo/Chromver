@@ -50,7 +50,9 @@ document.addEventListener('DOMContentLoaded', function () {
     function saveRating(rating) {
         chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
             const url = tabs[0].url;
-            const domain = url.match(/^https?:\/\/(?:www\.)?([^\/?#]+)/i)[1];
+            const match = url.match(/^https?:\/\/(?:www\.)?([^\/?#]+)/i);
+            const domain = match ? match[1] : 'unbekannt';
+
 
             chrome.storage.sync.get(['ratings'], function (result) {
                 let ratings = result.ratings || {};
@@ -150,6 +152,6 @@ document.addEventListener('DOMContentLoaded', function () {
             downloadAnchor.remove();
         });
     });
-    
+
 
 });
