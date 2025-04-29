@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     chrome.storage.sync.get(['ratings'], function (result) {
         const ratings = result.ratings || {};
-
+        SetStarForWebsite();
         chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
             const url = tabs[0].url;
             const domain = url.match(/^https?:\/\/(?:www\.)?([^\/?#]+)/i)[1];
@@ -114,7 +114,31 @@ document.addEventListener('DOMContentLoaded', function () {
                     bar.style.width = `${width}%`;
                 }
             }
-            
+
         }
     }
+
+
+    function SetStarForWebsite() {
+        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+            const url = tabs[0].url;
+            const domain = url.match(/^https?:\/\/(?:www\.)?([^\/?#]+)/i)[1];
+
+            chrome.storage.sync.get(['ratings'], function (result) {
+                const ratings = result.ratings || {};
+                const domainRating = ratings[domain] || 0;
+
+                const container = document.getElementById("website_rating");
+
+                for (let i = 0; i < domainRating; i++) {
+                    container.innerHTML += '<span class="fa fa-star checked"></span>';
+                }
+
+                for (let i = 0; i < 5 - domainRating; i++) {
+                    container.innerHTML += '<span class="fa fa-star"></span>';
+                }
+            });
+        });
+    }
+
 });
