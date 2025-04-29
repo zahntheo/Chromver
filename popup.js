@@ -139,5 +139,17 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     }
+    document.getElementById('export-button').addEventListener('click', function () {
+        chrome.storage.sync.get(['ratings'], function (result) {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(result.ratings, null, 2));
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.setAttribute("href", dataStr);
+            downloadAnchor.setAttribute("download", "ratings.json");
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
+        });
+    });
+    
 
 });
