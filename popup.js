@@ -37,6 +37,9 @@ document.addEventListener('DOMContentLoaded', function () {
             completeRating += value;
         };
 
+        if (completeRating = 0){
+            return 0
+        }
         return completeRating / Object.entries(ratings).length;
     }
 
@@ -74,6 +77,38 @@ document.addEventListener('DOMContentLoaded', function () {
                 bar.style.width = `${width}%`;
             }
         }
+    }
+
+   
+    const stars = document.querySelectorAll('.star');
+    const ratingDisplay = document.getElementById('selected-rating');
+    let selectedRating = 0;
+
+    stars.forEach(star => {
+        star.addEventListener('mouseover', () => {
+            const value = star.getAttribute('data-value');
+            highlightStars(value);
+        });
+
+        star.addEventListener('mouseout', () => {
+            highlightStars(selectedRating);
+        });
+
+        star.addEventListener('click', () => {
+            selectedRating = star.getAttribute('data-value');
+            ratingDisplay.textContent = `Bewertung: ${selectedRating} Sterne`;
+        });
+    });
+
+    function highlightStars(rating) {
+        stars.forEach(star => {
+            const value = star.getAttribute('data-value');
+            if (value <= rating) {
+                star.classList.add('filled');
+            } else {
+                star.classList.remove('filled');
+            }
+        });
     }
 
 });
